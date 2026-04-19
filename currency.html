@@ -298,11 +298,20 @@
 
     async function fetchRates(base) {
       if (cachedRates[base]) return; // 已有快取
-      const url = `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${base.toLowerCase()}.json`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error('API 錯誤');
-      const data = await res.json();
-      cachedRates[base] = data[base.toLowerCase()];
+      const key = base.toLowerCase();
+      const urls = [
+        `https://latest.currency-api.pages.dev/v1/currencies/${key}.json`,
+        `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${key}.json`
+      ];
+      let data = null;
+      for (const url of urls) {
+        try {
+          const res = await fetch(url);
+          if (res.ok) { data = await res.json(); break; }
+        } catch (_) {}
+      }
+      if (!data) throw new Error('API 錯誤');
+      cachedRates[base] = data[key];
       cachedDate[base] = data.date;
     }
 
