@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我如何用 Claude Code 加速工作流</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #f9f9fb;
+  --surface: #ffffff;
+  --border: #e5e5ea;
+  --text: #1c1c1e;
+  --muted: #8e8e93;
+  --accent: #5e5ce6;
+  --accent-light: #f0f0ff;
+  --tag-auto: #e8f5e9;
+  --tag-auto-text: #2e7d32;
+  --tag-cowork: #e3f2fd;
+  --tag-cowork-text: #1565c0;
+  --tag-dev: #fce4ec;
+  --tag-dev-text: #880e4f;
+  --tag-research: #fff8e1;
+  --tag-research-text: #f57f17;
+  --tag-content: #f3e5f5;
+  --tag-content-text: #6a1b9a;
+  --radius: 16px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+}
+
+body {
+  font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  padding: 48px 24px 80px;
+}
+
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 48px 0 56px;
+}
+
+.hero-eyebrow {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.25;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.hero p {
+  font-size: 17px;
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 auto 32px;
+  line-height: 1.8;
+}
+
+.hero-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 8px 18px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.hero-meta strong {
+  color: var(--text);
+}
+
+/* Section label */
+.section-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Cards */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 48px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 32px;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 8px 32px rgba(0,0,0,0.06);
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.card-title-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.card-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.2px;
+}
+
+.card-subtitle {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+  font-weight: 400;
+}
+
+/* Tags */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.tag {
+  padding: 3px 10px;
+  border-radius: 99px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+.tag-auto    { background: var(--tag-auto);    color: var(--tag-auto-text); }
+.tag-cowork  { background: var(--tag-cowork);  color: var(--tag-cowork-text); }
+.tag-dev     { background: var(--tag-dev);     color: var(--tag-dev-text); }
+.tag-research{ background: var(--tag-research);color: var(--tag-research-text); }
+.tag-content { background: var(--tag-content); color: var(--tag-content-text); }
+
+/* Divider */
+.card-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 20px 0;
+}
+
+/* Body text */
+.card-desc {
+  font-size: 15px;
+  color: #3c3c43;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+/* Flow steps */
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.flow-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+
+.flow-steps {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+
+.step-icon {
+  font-size: 14px;
+}
+
+.arrow {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Highlight box */
+.highlight-box {
+  background: var(--accent-light);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #3730a3;
+  line-height: 1.7;
+}
+
+.highlight-box strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+/* Pills row */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.pill {
+  font-size: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 99px;
+  padding: 4px 12px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Two-col layout for some cards */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .two-col { grid-template-columns: 1fr; }
+  .card-header { flex-direction: column; }
+  .card { padding: 22px 20px; }
+}
+
+.mini-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.mini-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.mini-card p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 2;
+}
+
+.footer strong { color: var(--text); }
+
+/* Role grid */
+.role-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.role-item {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.role-emoji {
+  font-size: 18px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.role-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.role-desc {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+  line-height: 1.5;
+}
+
+/* Brand chips */
+.brand-chips {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.brand-chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 13px;
+}
+
+.brand-chip-name {
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+
+.brand-chip-role {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* Screenshots */
+.screenshot-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.screenshot-row.single {
+  grid-template-columns: 1fr;
+}
+
+.screenshot-wrap {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.screenshot-wrap img {
+  width: 100%;
+  display: block;
+}
+
+.screenshot-caption {
+  font-size: 11px;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 6px;
+}
+
+@media (max-width: 600px) {
+  .screenshot-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-eyebrow">Claude Code × 工作流分享</div>
+    <h1>我如何用 AI 加速<br>三個品牌的日常工作</h1>
+    <p>從廣告報表自動化、虛擬員工系統，到工具開發與市場研究，這是我與 Claude Code 的實際協作方式。</p>
+    <div class="hero-meta">
+      <span>米米 Miyavi</span>
+      <span style="color: var(--border)">|</span>
+      <strong>7 個應用場景</strong>
+      <span style="color: var(--border)">|</span>
+      <span>2026</span>
+    </div>
+  </div>
+
+  <div class="section-label">應用場景</div>
+
+  <div class="cards">
+
+    <!-- 01 AI 員工 × 品牌架構 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <div class="card-number">01</div>
+          <div>
+            <div class="card-title">AI 員工 × 品牌記憶架構</div>
+            <div class="card-subtitle">虛擬員工系統 · 跨品牌知識管理</div>
+          </div>
+        </div>
+        <div class="tags">
+          <span class="tag tag-auto">系統架構</span>
+        </div>
+      </div>
+
+      <p class="card-desc">
+        同時經營三個品牌、身兼多種角色，每個任務需要的思維框架截然不同。我把不同專業角色封裝成 Claude Code 的 <strong>Agent（虛擬員工）</strong>，任務一來，對應員工自動到位——不用每次重新解釋背景，不用手動切換模式。
+      </p>
+
+      <div class="flow-title">三個品牌</div>
+      <div class="brand-chips">
+        <div class="brand-chip">
+          <div class="brand-chip-name">領先時代 B.R.A.N.D</div>
+          <div class="brand-chip-role">廣告投放合作（專案）</div>
+        </div>
+        <div class="brand-chip">
+          <div class="brand-chip-name">數位槓桿 DigiLev</div>
+          <div class="brand-chip-role">共同主理人 · 課程講師</div>
+        </div>
+        <div class="brand-chip">
+          <div class="brand-chip-name">小勝利 Small Wins</div>
+          <div class="brand-chip-role">創辦人 · Notion 模板</div>
+        </div>
+      </div>
+
+      <hr class="card-divider">
+
+      <div class="flow-title">7 位虛擬員工</div>
+      <div class="role-grid">
+        <div class="role-item">
+          <div class="role-emoji">📊</div>
+          <div>
+            <div class="role-name">廣告策略師</div>
+            <div class="role-desc">投放策略、素材方向、成效分析</div>
+          </div>
+        </div>
+        <div class="role-item">
+          <div class="role-emoji">📱</div>
+          <div>
+            <div class="role-name">社群行銷</div>
+            <div class="role-desc">IG/Threads 文案、Reels 腳本</div>
+          </div>
+        </div>
+        <div class="role-item">
+          <div class="role-emoji">🧭</div>
+          <div>
+            <div class="role-name">品牌策略師</div>
+            <div class="role-desc">品牌定位、商業模式、市場策略</div>
+          </div>
+        </div>
+        <div class="role-item">
+          <div class="role-emoji">🗂</div>
+          <div>
+            <div class="role-name">個人助理</div>
+            <div class="role-desc">待辦排序、行程、行政雜務</div>
+          </div>
+        </div>
+        <div class="role-item">
+          <div class="role-emoji">📌</div>
+          <div>
+            <div class="role-name">PM 專案經理</div>
+            <div class="role-desc">跨品牌進度追蹤、阻塞點</div>
+          </div>
+        </div>
+        <div class="role-item">
+          <div class="role-emoji">💜</div>
+          <div>
+            <div class="role-name">心理狀態支持</div>
+            <div class="role-desc">情緒梳理、停止內耗、燃起動力</div>
+          </div>
+        </div>
+        <div class="role-item">
+          <div class="role-emoji">🧩</div>
+          <div>
+            <div class="role-name">Widget 開發專員</div>
+            <div class="role-desc">Notion widget 開發與部署</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="highlight-box" style="margin-top: 16px;">
+        <strong>強制規則</strong>
+        任務屬於哪個角色，Claude 的第一件事就是 invoke 對應 Agent——不允許先用通用模式回答再補叫。品牌背景、角色框架、過往記憶，全部自動帶入。
+      </div>
+    </div>
+
+    <!-- 02 廣告報表工作流 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <div class="card-number">02</div>
+          <div>
+            <div class="card-title">廣告報表自動化工作流</div>
+            <div class="card-subtitle">領先時代 B.R.A.N.D · 每週兩次</div>
+          </div>
+        </div>
+        <div class="tags">
+          <span class="tag tag-auto">全自動化</span>
+        </div>
+      </div>
+
+      <p class="card-desc">
+        輸入 <code style="background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:5px;font-size:13px;">/ads-report</code>，Claude 自動判斷今天是週一還是週五，執行對應流程——從三個平台拉數據、交叉歸因、跑判定邏輯，到輸出 Excel 報表，一個指令完成。
+      </p>
+
+      <div class="two-col">
+        <div class="mini-card">
+          <div class="mini-card-title">週一大盤點</div>
+          <p>上週完整報表 · 6 sheet Excel<br>廣告歸因 × 四象限判定<br>諮詢品質分析</p>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-title">週五快檢</div>
+          <p>本週一～週四<br>只看 CPL 有無超標<br>純文字輸出，快速決策</p>
+        </div>
+      </div>
+
+      <hr class="card-divider">
+
+      <div class="flow-title">三路數據來源</div>
+      <div class="flow-steps" style="margin-bottom: 16px;">
+        <div class="step"><span class="step-icon">📣</span>Meta 廣告後台</div>
+        <span class="arrow">+</span>
+        <div class="step"><span class="step-icon">📋</span>Systeme 名單系統</div>
+        <span class="arrow">+</span>
+        <div class="step"><span class="step-icon">🗃</span>Notion 諮詢資料庫</div>
+      </div>
+
+      <div class="flow-title">自動歸因邏輯</div>
+      <div class="pills">
+        <span class="pill">utm_content = 具體廣告 ID</span>
+        <span class="pill">utm_source = meta/ig/fb → Meta 廣告</span>
+        <span class="pill">convertkit → 電子報，不算廣告</span>
+        <span class="pill">無標籤 → 來源不明</span>
+      </div>
+
+      <div class="highlight-box" style="margin-top: 16px;">
+        <strong>判定機制</strong>
+        CPL ≤$5 好 · $5–8 警示 · ≥$8 不行。四象限（CPL × 有無諮詢）從「優等廣告」到「垃圾廣告」。停廣告需同時符合：CPL ≥$8 且 4 天 + 7 天趨勢都差。
+      </div>
+    </div>
+
+    <!-- 03 廣告痛點分析 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <div class="card-number">03</div>
+          <div>
+            <div class="card-title">廣告痛點分析 × TA 報告</div>
+            <div class="card-subtitle">Notion 諮詢名單 → 報告 → 廣告貼文</div>
+          </div>
+        </div>
+        <div class="tags">
+          <span class="tag tag-cowork">AI 共創</span>
+          <span class="tag tag-content">內容轉化</span>
+        </div>
+      </div>
+
+      <p class="card-desc">
+        從 Notion 諮詢資料庫直接抓取成交客戶的記錄，讓 Claude 分析這些人的共同痛點、背景、決策動機，生成結構化的 TA 分析報告——再把報告作為素材，產出廣告貼文。從數據到廣告，一條龍。
+      </p>
+
+      <div class="flow-title">執行流程</div>
+      <div class="flow-steps">
+        <div class="step"><span class="step-icon">🗃</span>串接 Notion 諮詢 DB</div>
+        <span class="arrow">→</span>
+        <div class="step"><span class="step-icon">🔍</span>篩出成交者記錄</div>
+        <span class="arrow">→</span>
+        <div class="step"><span class="step-icon">📝</span>痛點歸因分析</div>
+        <span class="arrow">→</span>
+        <div class="step"><span class="step-icon">📄</span>TA 分析報告</div>
+        <span class="arrow">→</span>
+        <div class="step"><span class="step-icon">📣</span>廣告貼文產出</div>
+      </div>
+
+      <div class="highlight-box" style="margin-top: 16px;">
+        <strong>為什麼這樣做？</strong>
+        廣告文案最難的不是寫作，是「知道受眾在痛什麼」。用真實諮詢數據回推，比靠感覺猜受眾準確得多。
+      </div>
+    </div>
+
+    <!-- 04 社群貼文排程表 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <div class="card-number">04</div>
+          <div>
+            <div class="card-title">社群貼文月排程表</div>
+            <div class="card-subtitle">IG · Threads · /social-plan 指令</div>
+          </div>
+        </div>
+        <div class="tags">
+          <span class="tag tag-content">內容規劃</span>
+          <span class="tag tag-cowork">AI 共創</span>
+        </div>
+      </div>
+
+      <p class="card-desc">
+        輸入 <code style="background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:5px;font-size:13px;">/social-plan</code>，由社群行銷 Agent 接手，根據品牌定位與當月目標，規劃完整的月排程——主題方向、格式配比、每篇文案角度，直接輸出可用的表格版本。
+      </p>
+
+      <div class="flow-title">輸出內容</div>
+      <div class="pills">
+        <span class="pill">月曆格式排程表</span>
+        <span class="pill">教育型 / 娛樂型 / 轉換型配比</span>
+        <span class="pill">每篇主題 + 文案角度</span>
+        <span class="pill">IG Reels 腳本方向</span>
+        <span class="pill">話題標籤策略</span>
+      </div>
+
+      <div class="highlight-box" style="margin-top: 16px;">
+        <strong>社群行銷 Agent 的思維框架</strong>
+        先確認這篇內容「為誰服務」（吸引新受眾 vs. 維繫現有受眾）→ 以信任建立路徑思考內容序列，不只看單篇效果。
+      </div>
+    </div>
+
+    <!-- 05 Notion Widgets 開發 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <div class="card-number">05</div>
+          <div>
+            <div class="card-title">Notion 模板 Widgets 開發</div>
+            <div class="card-subtitle">小勝利 · GitHub Pages 部署</div>
+          </div>
+        </div>
+        <div class="tags">
+          <span class="tag tag-dev">工具開發</span>
+        </div>
+      </div>
+
+      <p class="card-desc">
+        為 Notion 模板加入互動式 widget，讓下載模板的用戶可以直接使用內嵌工具。技術上用靜態 HTML + iframe embed，部署在 GitHub Pages，免費、永久、不需後端。
+      </p>
+
+      <div class="two-col">
+        <div class="mini-card">
+          <div class="mini-card-title">幣值換算器</div>
+          <p>8 種幣別（TWD/USD/JPY/KRW/EUR/GBP/HKD/SGD）· 即時匯率 API · 防抖 + 快取 · 日圓韓元取整數</p>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-title">番茄鐘</div>
+          <p>三段模式（工作/短休/長休）· 番茄造型漸層設計 · SVG 進度環 · 音效 · 分頁標題同步倒數</p>
+        </div>
+      </div>
+
+      <hr class="card-divider">
+
+      <div class="flow-title">開發到部署流程</div>
+      <div class="flow-steps">
+        <div class="step"><span class="step-icon">💬</span>描述需求給 Agent</div>
+        <span class="arrow">→</span>
+        <div class="step"><span class="step-icon">⚡</span>Claude 寫 HTML</div>
+        <span class="arrow">→</span>
+        <div class="step"><span class="step-icon">👁</span>視覺確認 + 截圖回報</div>
+        <span class="arrow">→</span>
+        <div class="step"><span class="step-icon">🚀</span>push → GitHub Pages</div>
+        <span class="arrow">→</span>
+        <div class="step"><span class="step-icon">📎</span>embed URL 放進 Notion</div>
+      </div>
+
+      <div class="screenshot-row" style="margin-top: 20px;">
+        <div>
+          <div class="screenshot-wrap">
+            <img src="./screenshot_pomodoro.png" alt="番茄鐘 widget 成品">
+          </div>
+          <div class="screenshot-caption">番茄鐘 — 番茄造型設計，SVG 進度環</div>
+        </div>
+        <div>
+          <div class="screenshot-wrap">
+            <img src="./screenshot_currency.png" alt="幣值換算器 widget 成品">
+          </div>
+          <div class="screenshot-caption">幣值換算器 — 8 種幣別，即時匯率</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06 文字轉語音工具 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <div class="card-number">06</div>
+          <div>
+            <div class="card-title">Speed Reader · 文字轉語音工具</div>
+            <div class="card-subtitle">Deepgram Aura TTS · Karaoke 同步 highlight</div>
+          </div>
+        </div>
+        <div class="tags">
+          <span class="tag tag-dev">工具開發</span>
+        </div>
+      </div>
+
+      <p class="card-desc">
+        描述需求，Claude Code 直接串接 Deepgram Aura TTS API 寫出工具。輸入文字，生成語音的同時取得逐字時間軸，播放時像 Karaoke 一樣逐字 highlight，已讀文字變灰，方便跟讀或校對。
+      </p>
+
+      <div class="flow-title">技術流程</div>
+      <div class="flow-steps" style="margin-bottom: 16px;">
+        <div class="step"><span class="step-icon">📝</span>輸入文字</div>
+        <span class="arrow">→</span>
+        <div class="step"><span class="step-icon">🔊</span>Deepgram TTS 生成音訊</div>
+        <span class="arrow">→</span>
+        <div class="step"><span class="step-icon">⏱</span>STT 取得逐字時間軸</div>
+        <span class="arrow">→</span>
+        <div class="step"><span class="step-icon">✨</span>播放 + Karaoke highlight</div>
+      </div>
+
+      <div class="two-col">
+        <div class="mini-card">
+          <div class="mini-card-title">語音選擇</div>
+          <p>6 種 Aura 語音（男/女、不同語氣風格）· 語速 0.75x–1.25x 可調</p>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-title">播放控制</div>
+          <p>進度條 seek · 暫停繼續 · 分頁標題顯示進度 · STT 失敗自動 fallback</p>
+        </div>
+      </div>
+
+      <div class="screenshot-row single" style="margin-top: 20px;">
+        <div>
+          <div class="screenshot-wrap">
+            <img src="./screenshot_speed_reader.png" alt="Speed Reader 成品">
+          </div>
+          <div class="screenshot-caption">Speed Reader 成品介面</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 07 市場研究 × 品牌願景網頁 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <div class="card-number">07</div>
+          <div>
+            <div class="card-title">國外顧問市場研究 × DigiLev 品牌願景</div>
+            <div class="card-subtitle">Gemini + Claude Chat Research → Claude Code 好讀網頁</div>
+          </div>
+        </div>
+        <div class="tags">
+          <span class="tag tag-research">研究</span>
+          <span class="tag tag-dev">輸出轉化</span>
+        </div>
+      </div>
+
+      <p class="card-desc">
+        分別用 Gemini 與 Claude Chat 的 Research 功能深度研究國外 Notion 顧問市場，產出各自的報告與洞察——再把兩份研究結果帶到 Claude Code，整合成結構化、適合對外分享的品牌願景網頁。
+      </p>
+
+      <div class="flow-title">研究到輸出的流程</div>
+      <div class="flow-steps">
+        <div class="step"><span class="step-icon">🔬</span>Gemini Research</div>
+        <span class="arrow">+</span>
+        <div class="step"><span class="step-icon">🔬</span>Claude Chat Research</div>
+        <span class="arrow">→</span>
+        <div class="step"><span class="step-icon">⚡</span>帶入 Claude Code</div>
+        <span class="arrow">→</span>
+        <div class="step"><span class="step-icon">🌐</span>好讀網頁版輸出</div>
+      </div>
+
+      <div class="highlight-box" style="margin-top: 16px;">
+        <strong>為什麼這樣用？</strong>
+        Research 功能負責廣度與深度的資料蒐集，Claude Code 負責把原始研究結果轉化成「可以拿去用」的格式。工具各司其職，不用同一個地方全包。
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div style="font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px;">一個人 × 三個品牌 × 一套 AI 工作系統</div>
+    <div>不是用 AI 取代思考，是讓 AI 處理重複的部分，<br>把精力放在只有我能做的決策上。</div>
+    <div style="margin-top: 20px; font-size: 12px;">米米 Miyavi · 2026</div>
+  </div>
+
+</div>
+</body>
+</html>
