@@ -110,12 +110,21 @@ body {
   padding: 28px 32px;
   box-shadow: var(--shadow);
   transition: border-color 0.2s, box-shadow 0.2s;
+  border-top: 2px solid transparent;
 }
 
 .card:hover {
-  border-color: #2e3050;
   box-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 8px 32px rgba(0,0,0,0.3);
 }
+
+/* Per-card color tints */
+.card-c1 { background: linear-gradient(160deg, #131828 0%, #15161d 60%); border-top-color: #224aad; }
+.card-c2 { background: linear-gradient(160deg, #0d1e22 0%, #15161d 60%); border-top-color: #0891b2; }
+.card-c3 { background: linear-gradient(160deg, #1e1608 0%, #15161d 60%); border-top-color: #d97706; }
+.card-c4 { background: linear-gradient(160deg, #18112a 0%, #15161d 60%); border-top-color: #7c3aed; }
+.card-c5 { background: linear-gradient(160deg, #1e0e18 0%, #15161d 60%); border-top-color: #e11d48; }
+.card-c6 { background: linear-gradient(160deg, #101428 0%, #15161d 60%); border-top-color: #4f46e5; }
+.card-c7 { background: linear-gradient(160deg, #0a1e18 0%, #15161d 60%); border-top-color: #059669; }
 
 /* Card header */
 .card-header {
@@ -371,7 +380,7 @@ code {
   <div class="cards">
 
     <!-- 01 -->
-    <div class="card">
+    <div class="card card-c1">
       <div class="card-header">
         <div class="card-title-group">
           <div class="card-number">01</div>
@@ -416,7 +425,7 @@ code {
     </div>
 
     <!-- 02 -->
-    <div class="card">
+    <div class="card card-c2">
       <div class="card-header">
         <div class="card-title-group">
           <div class="card-number">02</div>
@@ -465,7 +474,7 @@ code {
     </div>
 
     <!-- 03 -->
-    <div class="card">
+    <div class="card card-c3">
       <div class="card-header">
         <div class="card-title-group">
           <div class="card-number">03</div>
@@ -492,7 +501,7 @@ code {
     </div>
 
     <!-- 04 -->
-    <div class="card">
+    <div class="card card-c4">
       <div class="card-header">
         <div class="card-title-group">
           <div class="card-number">04</div>
@@ -523,7 +532,7 @@ code {
     </div>
 
     <!-- 05 -->
-    <div class="card">
+    <div class="card card-c5">
       <div class="card-header">
         <div class="card-title-group">
           <div class="card-number">05</div>
@@ -569,7 +578,7 @@ code {
     </div>
 
     <!-- 06 -->
-    <div class="card">
+    <div class="card card-c6">
       <div class="card-header">
         <div class="card-title-group">
           <div class="card-number">06</div>
@@ -604,7 +613,7 @@ code {
     </div>
 
     <!-- 07 -->
-    <div class="card">
+    <div class="card card-c7">
       <div class="card-header">
         <div class="card-title-group">
           <div class="card-number">07</div>
