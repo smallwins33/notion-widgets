@@ -117,14 +117,39 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 8px 32px rgba(0,0,0,0.3);
 }
 
-/* Per-card color tints */
-.card-c1 { background: linear-gradient(160deg, #131828 0%, #15161d 60%); border-top-color: #224aad; }
-.card-c2 { background: linear-gradient(160deg, #0d1e22 0%, #15161d 60%); border-top-color: #0891b2; }
-.card-c3 { background: linear-gradient(160deg, #1e1608 0%, #15161d 60%); border-top-color: #d97706; }
-.card-c4 { background: linear-gradient(160deg, #18112a 0%, #15161d 60%); border-top-color: #7c3aed; }
-.card-c5 { background: linear-gradient(160deg, #1e0e18 0%, #15161d 60%); border-top-color: #e11d48; }
-.card-c6 { background: linear-gradient(160deg, #101428 0%, #15161d 60%); border-top-color: #4f46e5; }
-.card-c7 { background: linear-gradient(160deg, #0a1e18 0%, #15161d 60%); border-top-color: #059669; }
+/* Per-card color theming via CSS custom properties */
+.card { --ca: #4d72d4; --cs: #1a2040; }
+
+.card-c1 { --ca: #5b8def; --cs: #151e3a; background: #141c38; border-top-color: #5b8def; border-color: #1e2d55; }
+.card-c2 { --ca: #22d3ee; --cs: #0d2530; background: #0e2430; border-top-color: #22d3ee; border-color: #0f3040; }
+.card-c3 { --ca: #fbbf24; --cs: #2a1e06; background: #221a06; border-top-color: #fbbf24; border-color: #3a2a08; }
+.card-c4 { --ca: #a78bfa; --cs: #1e1238; background: #1a1035; border-top-color: #a78bfa; border-color: #2a1850; }
+.card-c5 { --ca: #fb7185; --cs: #2e0e18; background: #280e1a; border-top-color: #fb7185; border-color: #401020; }
+.card-c6 { --ca: #818cf8; --cs: #111638; background: #111435; border-top-color: #818cf8; border-color: #1a1e50; }
+.card-c7 { --ca: #34d399; --cs: #0a2218; background: #0a2018; border-top-color: #34d399; border-color: #103028; }
+
+/* Card number badge inherits card accent */
+.card .card-number { background: var(--cs); color: var(--ca); }
+
+/* Inner table header tinted per card */
+.card .md-table th { background: var(--cs); }
+
+/* Flow line tinted */
+.card .flow-line { background: var(--cs); border-color: color-mix(in srgb, var(--ca) 20%, transparent); }
+
+/* Blockquote border uses card accent */
+.card .md-blockquote { border-left-color: var(--ca); background: var(--cs); color: color-mix(in srgb, var(--ca) 60%, #e8e8ea); }
+.card .md-blockquote strong { color: var(--ca); }
+.card .md-blockquote .warn-inline { border-top-color: color-mix(in srgb, var(--ca) 20%, transparent); }
+
+/* Bullet dot color */
+.card .bullet-list li::before { color: var(--ca); }
+
+/* Prompt label color */
+.card .prompt-label { color: var(--ca); }
+
+/* Inner heading color */
+.card .inner-heading { color: color-mix(in srgb, var(--ca) 70%, var(--muted)); }
 
 /* Card header */
 .card-header {
