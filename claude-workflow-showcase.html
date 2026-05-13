@@ -10,11 +10,11 @@
 
 :root {
   --bg: #0d0e13;
-  --surface: rgba(255,255,255,0.04);
-  --border: rgba(255,255,255,0.08);
+  --surface: rgba(255,255,255,0.05);
+  --border: rgba(255,255,255,0.09);
   --text: #f0f0f4;
   --muted: #6b6b80;
-  --dim: #9898a8;
+  --dim: #a0a0b4;
   --brand: #224aad;
   --brand-light: #5b8def;
 }
@@ -27,7 +27,6 @@ html, body {
   color: var(--text);
 }
 
-/* ── Deck ── */
 .deck { width: 100%; height: 100vh; position: relative; overflow: hidden; }
 
 .slide {
@@ -37,279 +36,117 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 60px 80px 100px;
+  padding: 56px 88px 96px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease, transform 0.3s ease;
-  transform: translateX(36px);
+  transform: translateX(40px);
   overflow-y: auto;
 }
 
-.slide.active {
-  opacity: 1;
-  pointer-events: all;
-  transform: translateX(0);
-}
+.slide.active { opacity: 1; pointer-events: all; transform: translateX(0); }
+.slide.exit-left { opacity: 0; transform: translateX(-40px); }
 
-.slide.exit-left {
-  opacity: 0;
-  transform: translateX(-36px);
-}
+/* Per-slide glow */
+.s0  { background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(34,74,173,0.2) 0%, transparent 70%), var(--bg); }
+.s1a { background: radial-gradient(ellipse 70% 60% at 15% 35%, rgba(34,74,173,0.14) 0%, transparent 65%), var(--bg); }
+.s1b { background: radial-gradient(ellipse 70% 60% at 80% 60%, rgba(34,74,173,0.12) 0%, transparent 65%), var(--bg); }
+.s2a { background: radial-gradient(ellipse 70% 55% at 80% 30%, rgba(8,145,178,0.12) 0%, transparent 65%), var(--bg); }
+.s2b { background: radial-gradient(ellipse 70% 55% at 20% 70%, rgba(8,145,178,0.12) 0%, transparent 65%), var(--bg); }
+.s3  { background: radial-gradient(ellipse 65% 55% at 25% 60%, rgba(217,119,6,0.12) 0%, transparent 65%), var(--bg); }
+.s4  { background: radial-gradient(ellipse 70% 55% at 75% 30%, rgba(167,139,250,0.12) 0%, transparent 65%), var(--bg); }
+.s5a { background: radial-gradient(ellipse 65% 55% at 15% 65%, rgba(251,113,133,0.12) 0%, transparent 65%), var(--bg); }
+.s5b { background: radial-gradient(ellipse 65% 55% at 80% 40%, rgba(251,113,133,0.12) 0%, transparent 65%), var(--bg); }
+.s6  { background: radial-gradient(ellipse 70% 55% at 75% 55%, rgba(129,140,248,0.12) 0%, transparent 65%), var(--bg); }
+.s7a { background: radial-gradient(ellipse 65% 55% at 25% 35%, rgba(52,211,153,0.12) 0%, transparent 65%), var(--bg); }
+.s7b { background: radial-gradient(ellipse 65% 55% at 75% 65%, rgba(52,211,153,0.12) 0%, transparent 65%), var(--bg); }
 
-/* Per-slide background glow */
-.slide-0 { background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(34,74,173,0.18) 0%, transparent 70%), var(--bg); }
-.slide-1 { background: radial-gradient(ellipse 70% 50% at 15% 30%, rgba(34,74,173,0.13) 0%, transparent 70%), var(--bg); }
-.slide-2 { background: radial-gradient(ellipse 70% 50% at 85% 65%, rgba(8,145,178,0.11) 0%, transparent 70%), var(--bg); }
-.slide-3 { background: radial-gradient(ellipse 60% 50% at 25% 65%, rgba(217,119,6,0.11) 0%, transparent 70%), var(--bg); }
-.slide-4 { background: radial-gradient(ellipse 70% 50% at 80% 25%, rgba(167,139,250,0.11) 0%, transparent 70%), var(--bg); }
-.slide-5 { background: radial-gradient(ellipse 60% 50% at 15% 70%, rgba(251,113,133,0.11) 0%, transparent 70%), var(--bg); }
-.slide-6 { background: radial-gradient(ellipse 70% 50% at 80% 40%, rgba(129,140,248,0.11) 0%, transparent 70%), var(--bg); }
-.slide-7 { background: radial-gradient(ellipse 60% 50% at 25% 30%, rgba(52,211,153,0.11) 0%, transparent 70%), var(--bg); }
-
-/* ── Nav ── */
+/* Nav */
 .nav {
-  position: fixed;
-  bottom: 28px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  z-index: 100;
-  background: rgba(13,14,19,0.75);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-  border-radius: 99px;
-  padding: 9px 18px;
+  position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+  display: flex; align-items: center; gap: 14px; z-index: 100;
+  background: rgba(13,14,19,0.8); backdrop-filter: blur(14px);
+  border: 1px solid var(--border); border-radius: 99px; padding: 9px 18px;
 }
-
-.nav-btn {
-  background: none;
-  border: none;
-  color: var(--dim);
-  cursor: pointer;
-  font-size: 18px;
-  padding: 2px 5px;
-  transition: color 0.15s;
-  user-select: none;
-  line-height: 1;
-}
-
+.nav-btn { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 20px; padding: 2px 5px; transition: color 0.15s; user-select: none; line-height: 1; }
 .nav-btn:hover { color: var(--text); }
 .nav-btn:disabled { opacity: 0.2; cursor: default; }
-
 .nav-dots { display: flex; gap: 6px; align-items: center; }
-
-.dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--muted);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
+.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); cursor: pointer; transition: all 0.2s; }
 .dot.active { width: 20px; border-radius: 99px; background: var(--brand-light); }
+.slide-counter { font-size: 13px; color: var(--muted); min-width: 36px; text-align: center; }
 
-.slide-counter { font-size: 12px; color: var(--muted); min-width: 34px; text-align: center; }
-
-/* ── Title slide ── */
-.title-eyebrow {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--brand-light);
-  margin-bottom: 16px;
-}
-
-.brand-line {
-  width: 48px; height: 3px;
-  background: var(--brand);
-  border-radius: 99px;
-  margin: 0 auto 28px;
-}
-
-.title-h1 {
-  font-size: clamp(32px, 5vw, 58px);
-  font-weight: 900;
-  letter-spacing: -1.2px;
-  line-height: 1.12;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.title-sub {
-  font-size: 17px;
-  color: var(--dim);
-  max-width: 500px;
-  text-align: center;
-  line-height: 1.75;
-  margin-bottom: 32px;
-}
-
-.meta-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 13px;
-  color: var(--muted);
-}
-
+/* Title slide */
+.title-eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--brand-light); margin-bottom: 16px; }
+.brand-line { width: 48px; height: 3px; background: var(--brand); border-radius: 99px; margin: 0 auto 30px; }
+.title-h1 { font-size: clamp(36px, 5.5vw, 64px); font-weight: 900; letter-spacing: -1.5px; line-height: 1.1; text-align: center; margin-bottom: 22px; }
+.title-sub { font-size: 19px; color: var(--dim); max-width: 540px; text-align: center; line-height: 1.75; margin-bottom: 34px; }
+.meta-row { display: flex; align-items: center; gap: 14px; font-size: 15px; color: var(--muted); }
 .meta-row strong { color: var(--text); }
-.meta-sep { width: 1px; height: 13px; background: var(--border); }
+.meta-sep { width: 1px; height: 14px; background: var(--border); }
 
-/* ── Content slide inner ── */
-.inner {
-  width: 100%;
-  max-width: 900px;
-}
+/* Content slide */
+.inner { width: 100%; max-width: 940px; }
+.slide-tag { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--brand-light); margin-bottom: 8px; opacity: 0.8; }
+.slide-h2 { font-size: clamp(26px, 3.5vw, 44px); font-weight: 800; letter-spacing: -0.8px; line-height: 1.15; margin-bottom: 6px; }
+.slide-kicker { font-size: 14px; color: var(--muted); margin-bottom: 26px; }
 
-.slide-num {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--brand-light);
-  margin-bottom: 8px;
-  opacity: 0.75;
-}
-
-.slide-h2 {
-  font-size: clamp(24px, 3.2vw, 40px);
-  font-weight: 800;
-  letter-spacing: -0.6px;
-  line-height: 1.15;
-  margin-bottom: 6px;
-}
-
-.slide-kicker {
-  font-size: 13px;
-  color: var(--muted);
-  margin-bottom: 28px;
-}
-
-/* ── Layout ── */
-.cols { display: grid; gap: 16px; }
+/* Layout */
+.cols { display: grid; gap: 18px; }
 .c2 { grid-template-columns: 1fr 1fr; }
 .c-half { grid-template-columns: 1fr 1.5fr; }
 .c-half-r { grid-template-columns: 1.5fr 1fr; }
 
-/* ── Block ── */
-.block {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 16px 18px;
-}
+/* Block */
+.block { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 18px 22px; }
+.blabel { font-size: 12px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
 
-.blabel {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 10px;
-}
-
-/* ── Table ── */
-.tbl { width: 100%; border-collapse: collapse; font-size: 13px; }
-.tbl th {
-  text-align: left;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  color: var(--muted);
-  padding: 5px 10px 8px;
-  border-bottom: 1px solid var(--border);
-}
-.tbl td {
-  padding: 8px 10px;
-  color: var(--dim);
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  font-size: 13px;
-  line-height: 1.5;
-}
+/* Table */
+.tbl { width: 100%; border-collapse: collapse; }
+.tbl th { text-align: left; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; color: var(--muted); padding: 5px 12px 9px; border-bottom: 1px solid var(--border); }
+.tbl td { padding: 10px 12px; color: var(--dim); border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 15px; line-height: 1.5; }
 .tbl tr:last-child td { border-bottom: none; }
 .tbl td strong { color: var(--text); font-weight: 500; }
 
-/* ── Bullets ── */
-.blist { list-style: none; display: flex; flex-direction: column; gap: 7px; }
-.blist li {
-  font-size: 13.5px;
-  color: var(--dim);
-  padding-left: 16px;
-  position: relative;
-  line-height: 1.6;
-}
-.blist li::before { content: '·'; position: absolute; left: 3px; color: var(--brand-light); font-weight: 700; }
+/* Bullets */
+.blist { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.blist li { font-size: 15px; color: var(--dim); padding-left: 18px; position: relative; line-height: 1.65; }
+.blist li::before { content: '·'; position: absolute; left: 4px; color: var(--brand-light); font-weight: 700; }
 
-/* ── Flow ── */
-.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; }
-.fstep { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 5px 12px; color: var(--dim); white-space: nowrap; }
-.farrow { color: var(--muted); font-size: 12px; }
+/* Flow */
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; }
+.fstep { background: var(--surface); border: 1px solid var(--border); border-radius: 9px; padding: 7px 14px; color: var(--dim); font-size: 14px; white-space: nowrap; }
+.farrow { color: var(--muted); font-size: 13px; }
 
-/* ── Quote ── */
-.quote {
-  border-left: 3px solid var(--brand);
-  background: rgba(34,74,173,0.08);
-  border-radius: 0 10px 10px 0;
-  padding: 13px 16px;
-  font-size: 13.5px;
-  color: #8baee8;
-  line-height: 1.75;
-}
-.quote strong { color: #a8c4f5; display: block; margin-bottom: 4px; }
+/* Quote */
+.quote { border-left: 3px solid var(--brand); background: rgba(34,74,173,0.09); border-radius: 0 12px 12px 0; padding: 16px 20px; font-size: 15px; color: #8baee8; line-height: 1.75; }
+.quote strong { color: #a8c4f5; display: block; margin-bottom: 5px; font-size: 15px; }
 
-/* ── Warn ── */
-.warn {
-  background: rgba(251,191,36,0.07);
-  border: 1px solid rgba(251,191,36,0.18);
-  border-radius: 8px;
-  padding: 9px 14px;
-  font-size: 13px;
-  color: #c49a40;
-}
+/* Warn */
+.warn { background: rgba(251,191,36,0.07); border: 1px solid rgba(251,191,36,0.18); border-radius: 9px; padding: 10px 16px; font-size: 14px; color: #c49a40; }
 
-/* ── Code ── */
-code {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid var(--border);
-  color: var(--brand-light);
-  padding: 2px 7px;
-  border-radius: 5px;
-  font-size: 12.5px;
-  font-family: 'SF Mono', 'Fira Code', monospace;
-}
+/* Code */
+code { background: rgba(255,255,255,0.07); border: 1px solid var(--border); color: var(--brand-light); padding: 2px 8px; border-radius: 5px; font-size: 13.5px; font-family: 'SF Mono', 'Fira Code', monospace; }
 
-/* ── Prompt ── */
-.prompt {
-  background: rgba(0,0,0,0.4);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 13px 15px;
-  font-size: 12.5px;
-  color: #9898b8;
-  line-height: 1.8;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
+/* Prompt */
+.prompt { background: rgba(0,0,0,0.45); border: 1px solid var(--border); border-radius: 10px; padding: 15px 18px; font-size: 13.5px; color: #9898b8; line-height: 1.85; white-space: pre-wrap; word-break: break-word; }
 
-/* ── Screenshot ── */
-.shot { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+/* Screenshot */
+.shot { border-radius: 10px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
 .shot img { width: 100%; display: block; }
-.shot-cap { font-size: 11px; color: var(--muted); text-align: center; margin-top: 5px; }
+.shot-cap { font-size: 12px; color: var(--muted); text-align: center; margin-top: 6px; }
 
-/* ── Role grid ── */
-.role-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
-.role-item { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 9px 11px; display: flex; gap: 8px; align-items: flex-start; }
-.role-emoji { font-size: 15px; flex-shrink: 0; }
-.role-name { font-size: 12px; font-weight: 600; color: var(--text); }
-.role-desc { font-size: 11px; color: var(--muted); margin-top: 1px; line-height: 1.4; }
+/* Role grid */
+.role-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; }
+.role-item { background: var(--surface); border: 1px solid var(--border); border-radius: 9px; padding: 11px 13px; display: flex; gap: 9px; align-items: flex-start; }
+.role-emoji { font-size: 17px; flex-shrink: 0; }
+.role-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.role-desc { font-size: 12px; color: var(--muted); margin-top: 2px; line-height: 1.4; }
 
 @media (max-width: 700px) {
   .slide { padding: 40px 20px 90px; }
   .c2, .c-half, .c-half-r { grid-template-columns: 1fr; }
+  .role-grid { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
@@ -317,7 +154,7 @@ code {
 <div class="deck">
 
   <!-- 0: Title -->
-  <div class="slide slide-0 active">
+  <div class="slide s0 active">
     <div class="title-eyebrow">Claude Code × 工作流分享</div>
     <div class="brand-line"></div>
     <h1 class="title-h1">我如何用 Claude Code<br>加速工作流</h1>
@@ -331,59 +168,65 @@ code {
     </div>
   </div>
 
-  <!-- 1: AI 員工 × 品牌記憶架構 -->
-  <div class="slide slide-1">
+  <!-- 1a: AI 員工 — 品牌 + 規則 -->
+  <div class="slide s1a">
     <div class="inner">
-      <div class="slide-num">01 / 07</div>
+      <div class="slide-tag">01 / 07</div>
       <h2 class="slide-h2">AI 員工 × 品牌記憶架構</h2>
       <p class="slide-kicker">類型：系統架構</p>
 
-      <div class="cols c-half">
-        <div style="display:flex;flex-direction:column;gap:14px;">
-          <div class="block">
-            <div class="blabel">三個品牌的工作</div>
-            <table class="tbl">
-              <thead><tr><th>品牌</th><th>米米的角色</th></tr></thead>
-              <tbody>
-                <tr><td><strong>領先時代 B.R.A.N.D</strong></td><td>廣告投放（專案合作）</td></tr>
-                <tr><td><strong>數位槓桿 DigiLev</strong></td><td>共同主理人 · 課程講師</td></tr>
-                <tr><td><strong>小勝利 Small Wins</strong></td><td>創辦人 · Notion 模板</td></tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="quote">
-            <strong>強制規則</strong>
-            給指令後，Claude 要分辨任務屬於哪個角色，請對應的虛擬員工出來工作（品牌背景、角色框架、過往記憶，全部自動帶入），不允許先用通用模式回答再補叫。
-            <span style="display:block;margin-top:8px;padding-top:8px;border-top:1px solid rgba(91,141,239,0.15);color:#c49a40;font-size:13px;">⚠️ 備註：這裡常常會出錯，還不知道怎麼解決！</span>
-          </div>
-        </div>
+      <p style="font-size:16px;color:var(--dim);line-height:1.75;margin-bottom:22px;">同時經營品牌、專案合作，身兼多種角色並需要執行不同類型的工作，每個任務需要的思維框架都不同。我把不同專業角色封裝成 Claude Code 的 <strong style="color:var(--text)">Agent（虛擬員工）</strong>，任務一來，對應員工自動到位，不用每次重新解釋背景，也不用手動切換模式。</p>
 
+      <div class="cols c-half">
         <div class="block">
-          <div class="blabel">7 位虛擬員工</div>
-          <div class="role-grid">
-            <div class="role-item"><div class="role-emoji">📊</div><div><div class="role-name">廣告策略師*</div><div class="role-desc">投放策略、素材方向、成效分析</div></div></div>
-            <div class="role-item"><div class="role-emoji">📱</div><div><div class="role-name">社群行銷*</div><div class="role-desc">IG/Threads 文案、Reels 腳本</div></div></div>
-            <div class="role-item"><div class="role-emoji">🧭</div><div><div class="role-name">品牌策略師*</div><div class="role-desc">品牌定位、商業模式、市場策略</div></div></div>
-            <div class="role-item"><div class="role-emoji">🗂</div><div><div class="role-name">個人助理</div><div class="role-desc">待辦排序、行程、行政雜務</div></div></div>
-            <div class="role-item"><div class="role-emoji">📌</div><div><div class="role-name">PM 專案經理</div><div class="role-desc">跨品牌進度追蹤、阻塞點</div></div></div>
-            <div class="role-item"><div class="role-emoji">💜</div><div><div class="role-name">心理狀態支持*</div><div class="role-desc">情緒梳理、停止內耗、燃起動力</div></div></div>
-            <div class="role-item"><div class="role-emoji">🧩</div><div><div class="role-name">Widget 開發專員*</div><div class="role-desc">Notion widget 開發與部署</div></div></div>
-          </div>
+          <div class="blabel">三個品牌的工作</div>
+          <table class="tbl">
+            <thead><tr><th>品牌</th><th>米米的角色</th></tr></thead>
+            <tbody>
+              <tr><td><strong>領先時代 B.R.A.N.D</strong></td><td>廣告投放（專案合作）</td></tr>
+              <tr><td><strong>數位槓桿 DigiLev</strong></td><td>共同主理人 · 課程講師</td></tr>
+              <tr><td><strong>小勝利 Small Wins</strong></td><td>創辦人 · Notion 模板</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="quote">
+          <strong>強制規則</strong>
+          給指令後，Claude 要分辨任務屬於哪個角色，請對應的虛擬員工出來工作（品牌背景、角色框架、過往記憶，全部自動帶入），不允許先用通用模式回答再補叫。
+          <span style="display:block;margin-top:10px;padding-top:10px;border-top:1px solid rgba(91,141,239,0.15);color:#c49a40;font-size:14px;">⚠️ 備註：這裡常常會出錯，還不知道怎麼解決！</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 2: 廣告報表 -->
-  <div class="slide slide-2">
+  <!-- 1b: AI 員工 — 7位虛擬員工 -->
+  <div class="slide s1b">
     <div class="inner">
-      <div class="slide-num">02 / 07</div>
+      <div class="slide-tag">01 / 07</div>
+      <h2 class="slide-h2">7 位虛擬員工</h2>
+      <p class="slide-kicker">AI 員工 × 品牌記憶架構</p>
+
+      <div class="role-grid">
+        <div class="role-item"><div class="role-emoji">📊</div><div><div class="role-name">廣告策略師*</div><div class="role-desc">投放策略、素材方向、成效分析</div></div></div>
+        <div class="role-item"><div class="role-emoji">📱</div><div><div class="role-name">社群行銷*</div><div class="role-desc">IG/Threads 文案、Reels 腳本</div></div></div>
+        <div class="role-item"><div class="role-emoji">🧭</div><div><div class="role-name">品牌策略師*</div><div class="role-desc">品牌定位、商業模式、市場策略</div></div></div>
+        <div class="role-item"><div class="role-emoji">🗂</div><div><div class="role-name">個人助理</div><div class="role-desc">待辦排序、行程、行政雜務</div></div></div>
+        <div class="role-item"><div class="role-emoji">📌</div><div><div class="role-name">PM 專案經理</div><div class="role-desc">跨品牌進度追蹤、阻塞點</div></div></div>
+        <div class="role-item"><div class="role-emoji">💜</div><div><div class="role-name">心理狀態支持*</div><div class="role-desc">情緒梳理、停止內耗、燃起動力</div></div></div>
+        <div class="role-item"><div class="role-emoji">🧩</div><div><div class="role-name">Widget 開發專員*</div><div class="role-desc">Notion widget 開發與部署</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2a: 廣告報表 — 介紹 + 模式 + 歸因 -->
+  <div class="slide s2a">
+    <div class="inner">
+      <div class="slide-tag">02 / 07</div>
       <h2 class="slide-h2">廣告報表自動化工作流</h2>
       <p class="slide-kicker">類型：全自動化 · 品牌：領先時代 B.R.A.N.D 課程 · 啟動頻率：每週兩次，手動</p>
 
-      <p style="font-size:14px;color:var(--dim);line-height:1.7;margin-bottom:16px;">輸入 <code>/ads-report</code>，Claude 自動判斷今天是週一還是週五，執行對應流程。從三個平台拉數據、交叉歸因、跑判定邏輯，到輸出 Excel 報表，一個指令完成。</p>
+      <p style="font-size:16px;color:var(--dim);line-height:1.75;margin-bottom:20px;">輸入 <code>/ads-report</code>，Claude 自動判斷今天是週一還是週五，執行對應流程。從三個平台拉數據、交叉歸因、跑判定邏輯，到輸出 Excel 報表，一個指令完成。</p>
 
-      <div class="cols c2" style="margin-bottom:14px;">
+      <div class="cols c2">
         <div class="block">
           <div class="blabel">兩種模式</div>
           <table class="tbl">
@@ -404,6 +247,15 @@ code {
           </ul>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- 2b: 廣告報表 — 數據來源 + 設定方式 -->
+  <div class="slide s2b">
+    <div class="inner">
+      <div class="slide-tag">02 / 07</div>
+      <h2 class="slide-h2">廣告報表自動化工作流</h2>
+      <p class="slide-kicker">三路數據來源 · 設定方式</p>
 
       <div class="cols c2">
         <div class="block">
@@ -429,13 +281,13 @@ code {
   </div>
 
   <!-- 3: 痛點分析 -->
-  <div class="slide slide-3">
+  <div class="slide s3">
     <div class="inner">
-      <div class="slide-num">03 / 07</div>
+      <div class="slide-tag">03 / 07</div>
       <h2 class="slide-h2">廣告痛點分析 × TA 報告</h2>
       <p class="slide-kicker">類型：AI 共創 · 內容轉化</p>
 
-      <ul class="blist" style="margin-bottom:16px;">
+      <ul class="blist" style="margin-bottom:20px;">
         <li>串接 Notion 諮詢 DB → 篩出成交者記錄 → 痛點歸因分析 → TA 分析報告</li>
         <li>最後手動廣告圖文產出</li>
         <li>未來待優化：讓廣告的痛點呈現，對齊課程內容（解方）</li>
@@ -449,13 +301,13 @@ code {
   </div>
 
   <!-- 4: 社群排程 -->
-  <div class="slide slide-4">
+  <div class="slide s4">
     <div class="inner">
-      <div class="slide-num">04 / 07</div>
+      <div class="slide-tag">04 / 07</div>
       <h2 class="slide-h2">社群貼文月排程表</h2>
       <p class="slide-kicker">類型：內容規劃 · AI 共創 · 平台：IG · Threads</p>
 
-      <p style="font-size:14px;color:var(--dim);line-height:1.7;margin-bottom:18px;">輸入 <code>/social-plan</code>，由社群行銷的虛擬員工接手，根據品牌定位與當月目標，規劃完整的月排程——包含主題方向、格式配比、每篇文案角度，直接輸出可用的表格版本。</p>
+      <p style="font-size:16px;color:var(--dim);line-height:1.75;margin-bottom:22px;">輸入 <code>/social-plan</code>，由社群行銷的虛擬員工接手，根據品牌定位與當月目標，規劃完整的月排程——包含主題方向、格式配比、每篇文案角度，直接輸出可用的表格版本。</p>
 
       <div class="cols c2">
         <div class="block">
@@ -475,16 +327,16 @@ code {
     </div>
   </div>
 
-  <!-- 5: Widgets -->
-  <div class="slide slide-5">
+  <!-- 5a: Widgets — 介紹 + 兩個 widget -->
+  <div class="slide s5a">
     <div class="inner">
-      <div class="slide-num">05 / 07</div>
+      <div class="slide-tag">05 / 07</div>
       <h2 class="slide-h2">Notion 模板 Widgets 開發</h2>
       <p class="slide-kicker">類型：工具開發，GitHub Pages 部署 · 品牌：小勝利</p>
 
-      <p style="font-size:14px;color:var(--dim);line-height:1.7;margin-bottom:16px;">為 Notion 模板加入互動式 widget，讓下載模板的用戶可以直接使用內嵌工具，不用自行串接 API，或使用第三方 widgets 服務商。技術上用靜態 HTML + iframe embed，部署在 GitHub Pages，免費、永久、不需後端。</p>
+      <p style="font-size:16px;color:var(--dim);line-height:1.75;margin-bottom:20px;">為 Notion 模板加入互動式 widget，讓下載模板的用戶可以直接使用內嵌工具，不用自行串接 API，或使用第三方 widgets 服務商。技術上用靜態 HTML + iframe embed，部署在 GitHub Pages，免費、永久、不需後端。</p>
 
-      <div class="cols c2" style="margin-bottom:14px;">
+      <div class="cols c2">
         <div class="block">
           <div class="blabel">幣值換算器</div>
           <ul class="blist">
@@ -502,42 +354,47 @@ code {
           </ul>
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="cols c-half-r" style="align-items:center;">
+  <!-- 5b: Widgets — 部署流程 + 截圖 -->
+  <div class="slide s5b">
+    <div class="inner">
+      <div class="slide-tag">05 / 07</div>
+      <h2 class="slide-h2">開發到部署流程</h2>
+      <p class="slide-kicker">Notion 模板 Widgets 開發</p>
+
+      <div class="flow" style="margin-bottom:28px;">
+        <div class="fstep">💬 描述需求給 Agent</div><div class="farrow">→</div>
+        <div class="fstep">⚡ Claude 寫 HTML</div><div class="farrow">→</div>
+        <div class="fstep">👁 視覺確認 + 截圖回報</div><div class="farrow">→</div>
+        <div class="fstep">🚀 push → GitHub Pages</div><div class="farrow">→</div>
+        <div class="fstep">📎 embed URL 放進 Notion 模板（客戶不用做任何動作，直接套用）</div>
+      </div>
+
+      <div class="cols c2" style="max-width:560px;margin:0 auto;">
         <div>
-          <div class="blabel" style="margin-bottom:8px;">開發到部署流程</div>
-          <div class="flow">
-            <div class="fstep">💬 描述需求給 Agent</div><div class="farrow">→</div>
-            <div class="fstep">⚡ Claude 寫 HTML</div><div class="farrow">→</div>
-            <div class="fstep">👁 視覺確認 + 截圖回報</div><div class="farrow">→</div>
-            <div class="fstep">🚀 push → GitHub Pages</div><div class="farrow">→</div>
-            <div class="fstep">📎 embed URL 放進 Notion 模板（客戶不用做任何動作，直接套用）</div>
-          </div>
+          <div class="shot"><img src="./screenshot_pomodoro.png" alt="番茄鐘"></div>
+          <div class="shot-cap">番茄鐘</div>
         </div>
-        <div class="cols c2" style="gap:10px;">
-          <div>
-            <div class="shot"><img src="./screenshot_pomodoro.png" alt="番茄鐘"></div>
-            <div class="shot-cap">番茄鐘</div>
-          </div>
-          <div>
-            <div class="shot"><img src="./screenshot_currency.png" alt="幣值換算器"></div>
-            <div class="shot-cap">幣值換算器</div>
-          </div>
+        <div>
+          <div class="shot"><img src="./screenshot_currency.png" alt="幣值換算器"></div>
+          <div class="shot-cap">幣值換算器</div>
         </div>
       </div>
     </div>
   </div>
 
   <!-- 6: Speed Reader -->
-  <div class="slide slide-6">
+  <div class="slide s6">
     <div class="inner">
-      <div class="slide-num">06 / 07</div>
+      <div class="slide-tag">06 / 07</div>
       <h2 class="slide-h2">Speed Reader · 文字轉語音工具</h2>
       <p class="slide-kicker">類型：工具開發 · API：Deepgram Aura TTS · Karaoke 同步 highlight</p>
 
       <div class="cols c-half">
-        <div style="display:flex;flex-direction:column;gap:14px;">
-          <p style="font-size:14px;color:var(--dim);line-height:1.7;">描述需求，Claude Code 直接串接 Deepgram Aura TTS API 寫出工具。輸入文字，生成語音的同時取得逐字時間軸，播放時像 Karaoke 一樣逐字 highlight，已讀文字變灰，方便跟讀或校對。</p>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <p style="font-size:16px;color:var(--dim);line-height:1.75;">描述需求，Claude Code 直接串接 Deepgram Aura TTS API 寫出工具。輸入文字，生成語音的同時取得逐字時間軸，播放時像 Karaoke 一樣逐字 highlight，已讀文字變灰，方便跟讀或校對。</p>
 
           <div class="block">
             <div class="blabel">技術流程</div>
@@ -569,40 +426,45 @@ code {
     </div>
   </div>
 
-  <!-- 7: 市場研究 -->
-  <div class="slide slide-7">
+  <!-- 7a: 市場研究 — 介紹 + 為什麼 + 元素 -->
+  <div class="slide s7a">
     <div class="inner">
-      <div class="slide-num">07 / 07</div>
+      <div class="slide-tag">07 / 07</div>
       <h2 class="slide-h2">國外顧問市場研究 × DigiLev 品牌願景</h2>
       <p class="slide-kicker">類型：研究 · 輸出轉化</p>
 
+      <p style="font-size:16px;color:var(--dim);line-height:1.75;margin-bottom:22px;">分別用 Gemini 與 Claude Chat 的 Research 功能深度研究國外 Notion 顧問市場，產出各自的報告與洞察，再把兩份研究結果帶到 Claude Code，整合成結構化、適合閱讀的品牌願景網頁。</p>
+
       <div class="cols c2">
-        <div style="display:flex;flex-direction:column;gap:12px;">
-          <p style="font-size:14px;color:var(--dim);line-height:1.7;">分別用 Gemini 與 Claude Chat 的 Research 功能深度研究國外 Notion 顧問市場，產出各自的報告與洞察，再把兩份研究結果帶到 Claude Code，整合成結構化、適合閱讀的品牌願景網頁。</p>
-
-          <div>
-            <p style="font-size:12px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:var(--muted);margin-bottom:6px;">為什麼這樣用？</p>
-            <p style="font-size:13.5px;color:var(--dim);line-height:1.7;">Research 功能負責廣度與深度的資料蒐集，Claude Code 負責把原始研究結果轉化成「可以快速理解」的網頁格式。工具各司其職，不用同一個地方全包。</p>
-          </div>
-
-          <div class="block">
-            <div class="blabel">Prompt 所包含的元素</div>
-            <ul class="blist">
-              <li>大背景：定調市場</li>
-              <li>以當地語言深入權威＋社群</li>
-              <li>結構化數據的具體內容</li>
-              <li>研究量體</li>
-              <li>報告結果</li>
-            </ul>
-          </div>
+        <div>
+          <p style="font-size:13px;font-weight:600;letter-spacing:0.8px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;">為什麼這樣用？</p>
+          <p style="font-size:16px;color:var(--dim);line-height:1.75;">Research 功能負責廣度與深度的資料蒐集，Claude Code 負責把原始研究結果轉化成「可以快速理解」的網頁格式。工具各司其職，不用同一個地方全包。</p>
         </div>
-
-        <div style="display:flex;flex-direction:column;gap:10px;">
-          <div class="blabel">Research 模式使用的 Prompt</div>
-          <div class="prompt">針對美國、歐洲、亞洲市場，進行「Notion 顧問業」的深度掃描（請把 AI 現在的趨勢也一同納入考量）。請以當地語言（英語、日語等）搜尋權威報告與本月當地社群討論。我需要結構化的數據：市場規模、CAGR、競品分析、以及在地消費者偏好。請綜合閱讀至少 500 篇以上的資料，並標註來源。結論從四個不同的角度來回答，成長的、衰退的、新的機會、以及應捨棄的類別是什麼，並解釋為什麼？</div>
-          <div class="prompt">接著分析：如果要在台灣建立一間足以壟斷市場的數位工作流設計顧問公司，幫助大中小企業用不同的數位工具（先以 Notion 為主，後面可以延伸整合不同工具）製作內部工作流營運系統，實際上可落地執行的藍圖跟個階段運作策略為何？備註：壟斷的概念來自 Peter Thiel，重點在於建立一個根本不用競爭、跟其他相同性質的競品拉開距離的地位。另外，在市場供需概念方面，可以參考 Oversubscribed 一書中的概念。</div>
-          <p style="font-size:12.5px;color:var(--muted);line-height:1.7;">添加自己在書中讀到的框架，生成理想中的結果。（使用 AI 時的思維框架很重要，用進 prompt 也會生成跟別人比較不同的內容）</p>
+        <div class="block">
+          <div class="blabel">Prompt 所包含的元素</div>
+          <ul class="blist">
+            <li>大背景：定調市場</li>
+            <li>以當地語言深入權威＋社群</li>
+            <li>結構化數據的具體內容</li>
+            <li>研究量體</li>
+            <li>報告結果</li>
+          </ul>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7b: 市場研究 — Prompts -->
+  <div class="slide s7b">
+    <div class="inner">
+      <div class="slide-tag">07 / 07</div>
+      <h2 class="slide-h2">Research 模式使用的 Prompt</h2>
+      <p class="slide-kicker">國外顧問市場研究 × DigiLev 品牌願景</p>
+
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div class="prompt">針對美國、歐洲、亞洲市場，進行「Notion 顧問業」的深度掃描（請把 AI 現在的趨勢也一同納入考量）。請以當地語言（英語、日語等）搜尋權威報告與本月當地社群討論。我需要結構化的數據：市場規模、CAGR、競品分析、以及在地消費者偏好。請綜合閱讀至少 500 篇以上的資料，並標註來源。結論從四個不同的角度來回答，成長的、衰退的、新的機會、以及應捨棄的類別是什麼，並解釋為什麼？</div>
+        <div class="prompt">接著分析：如果要在台灣建立一間足以壟斷市場的數位工作流設計顧問公司，幫助大中小企業用不同的數位工具（先以 Notion 為主，後面可以延伸整合不同工具）製作內部工作流營運系統，實際上可落地執行的藍圖跟個階段運作策略為何？備註：壟斷的概念來自 Peter Thiel，重點在於建立一個根本不用競爭、跟其他相同性質的競品拉開距離的地位。另外，在市場供需概念方面，可以參考 Oversubscribed 一書中的概念。</div>
+        <p style="font-size:14px;color:var(--muted);line-height:1.7;">添加自己在書中讀到的框架，生成理想中的結果。（使用 AI 時的思維框架很重要，用進 prompt 也會生成跟別人比較不同的內容）</p>
       </div>
     </div>
   </div>
