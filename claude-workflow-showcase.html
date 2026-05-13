@@ -9,27 +9,30 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #f9f9fb;
-  --surface: #ffffff;
-  --border: #e5e5ea;
-  --text: #1c1c1e;
-  --muted: #8e8e93;
-  --accent: #5e5ce6;
-  --accent-light: #f0f0ff;
-  --tag-auto: #e8f5e9;
-  --tag-auto-text: #2e7d32;
-  --tag-cowork: #e3f2fd;
-  --tag-cowork-text: #1565c0;
-  --tag-dev: #fce4ec;
-  --tag-dev-text: #880e4f;
-  --tag-research: #fff8e1;
-  --tag-research-text: #f57f17;
-  --tag-content: #f3e5f5;
-  --tag-content-text: #6a1b9a;
-  --tag-system: #e8eaf6;
-  --tag-system-text: #283593;
+  --bg: #0e0f14;
+  --surface: #15161d;
+  --surface-2: #1c1d27;
+  --border: #252636;
+  --text: #eeeef2;
+  --muted: #6b6b80;
+  --accent: #4d72d4;          /* lightened #224aad for dark bg readability */
+  --accent-brand: #224aad;    /* 小勝利 brand blue — used sparingly */
+  --accent-light: #151e35;    /* deep navy tint */
+  --accent-glow: rgba(34,74,173,0.18);
+  --tag-auto: #0d2318;
+  --tag-auto-text: #4caf7d;
+  --tag-cowork: #111e38;
+  --tag-cowork-text: #6b9ee8;
+  --tag-dev: #2a1020;
+  --tag-dev-text: #d47ab0;
+  --tag-research: #261d08;
+  --tag-research-text: #d4a04d;
+  --tag-content: #1e1028;
+  --tag-content-text: #b07ada;
+  --tag-system: #111e38;
+  --tag-system-text: #6b9ee8;
   --radius: 16px;
-  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+  --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 4px 20px rgba(0,0,0,0.2);
 }
 
 body {
@@ -103,6 +106,18 @@ body {
   border-bottom: 1px solid var(--border);
 }
 
+/* Brand accent line under hero */
+.hero::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--accent-brand);
+  border-radius: 99px;
+  margin: 0 auto;
+  opacity: 0.7;
+}
+
 /* Cards */
 .cards {
   display: flex;
@@ -121,7 +136,8 @@ body {
 }
 
 .card:hover {
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 8px 32px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 8px 32px rgba(0,0,0,0.3);
+  border-color: #2e3050;
 }
 
 .card-header {
@@ -196,7 +212,7 @@ body {
 
 .card-desc {
   font-size: 15px;
-  color: #3c3c43;
+  color: #b0b0c0;
   line-height: 1.8;
   margin-bottom: 20px;
 }
@@ -224,8 +240,8 @@ body {
   gap: 6px;
   font-size: 13px;
   font-weight: 500;
-  color: var(--text);
-  background: var(--bg);
+  color: #c8c8d8;
+  background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 6px 12px;
@@ -237,11 +253,11 @@ body {
 /* Highlight box */
 .highlight-box {
   background: var(--accent-light);
-  border-left: 3px solid var(--accent);
+  border-left: 3px solid var(--accent-brand);
   border-radius: 0 8px 8px 0;
   padding: 12px 16px;
   font-size: 13px;
-  color: #3730a3;
+  color: #8baee8;
   line-height: 1.7;
 }
 
@@ -249,16 +265,17 @@ body {
   display: block;
   font-weight: 600;
   margin-bottom: 4px;
+  color: #a8c4f5;
 }
 
 /* Warning box */
 .warn-box {
-  background: #fff8e1;
-  border-left: 3px solid #f59e0b;
+  background: #1e1608;
+  border-left: 3px solid #b07820;
   border-radius: 0 8px 8px 0;
   padding: 12px 16px;
   font-size: 13px;
-  color: #92400e;
+  color: #c49a40;
   line-height: 1.7;
   margin-top: 10px;
 }
@@ -273,7 +290,7 @@ body {
 
 .pill {
   font-size: 12px;
-  background: var(--bg);
+  background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: 99px;
   padding: 4px 12px;
@@ -289,7 +306,7 @@ body {
 }
 
 .mini-card {
-  background: var(--bg);
+  background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 14px 16px;
@@ -317,7 +334,7 @@ body {
 }
 
 .role-item {
-  background: var(--bg);
+  background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 12px 14px;
@@ -331,8 +348,8 @@ body {
 .role-badge {
   display: inline-block;
   font-size: 10px;
-  background: var(--accent-light);
-  color: var(--accent);
+  background: #162040;
+  color: #6b9ee8;
   border-radius: 4px;
   padding: 1px 5px;
   margin-left: 4px;
@@ -350,7 +367,7 @@ body {
 }
 
 .brand-chip {
-  background: var(--surface);
+  background: var(--surface-2);
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 10px 16px;
@@ -372,7 +389,7 @@ body {
   align-items: flex-start;
   gap: 10px;
   font-size: 13px;
-  color: #3c3c43;
+  color: #b0b0c0;
   line-height: 1.6;
 }
 
@@ -380,8 +397,8 @@ body {
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: var(--accent-light);
-  color: var(--accent);
+  background: #162040;
+  color: #6b9ee8;
   font-size: 11px;
   font-weight: 700;
   display: flex;
@@ -393,8 +410,9 @@ body {
 
 /* Prompt block */
 .prompt-block {
-  background: #1c1c1f;
-  color: #e8e8ea;
+  background: #0a0d18;
+  color: #b0b8d0;
+  border: 1px solid #1e2540;
   border-radius: 10px;
   padding: 16px 18px;
   font-size: 13px;
@@ -409,7 +427,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  color: var(--muted);
+  color: #4d72d4;
   margin-bottom: 8px;
   margin-top: 16px;
 }
@@ -424,7 +442,7 @@ body {
 
 .bullet-list li {
   font-size: 13px;
-  color: #3c3c43;
+  color: #b0b0c0;
   line-height: 1.6;
   list-style: none;
   padding-left: 16px;
@@ -485,7 +503,7 @@ body {
 .md-table td {
   padding: 10px 12px;
   border-bottom: 1px solid var(--border);
-  color: #3c3c43;
+  color: #b0b0c0;
   line-height: 1.5;
 }
 
@@ -522,9 +540,9 @@ body {
     <p>從廣告報表自動化、虛擬員工系統，到工具開發與市場研究，這是我與 Claude Code 的實際協作方式。</p>
     <div class="hero-meta">
       <span>米米 Miyavi</span>
-      <span style="color:var(--border)">|</span>
+      <span style="color:#2e3050">|</span>
       <strong>7 個應用場景</strong>
-      <span style="color:var(--border)">|</span>
+      <span style="color:#2e3050">|</span>
       <span>2026</span>
     </div>
   </div>
@@ -639,7 +657,7 @@ body {
         <div class="tags"><span class="tag tag-auto">全自動化</span></div>
       </div>
 
-      <p class="card-desc">輸入 <code style="background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:5px;font-size:13px;">/ads-report</code>，Claude 自動判斷今天是週一還是週五，執行對應流程。從三個平台拉數據、交叉歸因、跑判定邏輯，到輸出 Excel 報表，一個指令完成。</p>
+      <p class="card-desc">輸入 <code style="background:#0a0d18;border:1px solid #1e2540;padding:2px 8px;border-radius:5px;font-size:13px;color:#6b9ee8;font-family:monospace;">/ads-report</code>，Claude 自動判斷今天是週一還是週五，執行對應流程。從三個平台拉數據、交叉歸因、跑判定邏輯，到輸出 Excel 報表，一個指令完成。</p>
 
       <div class="two-col" style="margin-bottom:20px;">
         <div class="mini-card">
@@ -741,7 +759,7 @@ body {
         </div>
       </div>
 
-      <p class="card-desc">輸入 <code style="background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:5px;font-size:13px;">/social-plan</code>，由社群行銷的虛擬員工接手，根據品牌定位與當月目標，規劃完整的月排程——包含主題方向、格式配比、每篇文案角度，直接輸出可用的表格版本。</p>
+      <p class="card-desc">輸入 <code style="background:#0a0d18;border:1px solid #1e2540;padding:2px 8px;border-radius:5px;font-size:13px;color:#6b9ee8;font-family:monospace;">/social-plan</code>，由社群行銷的虛擬員工接手，根據品牌定位與當月目標，規劃完整的月排程——包含主題方向、格式配比、每篇文案角度，直接輸出可用的表格版本。</p>
 
       <div class="flow-title">輸出內容</div>
       <div class="pills">
@@ -916,7 +934,7 @@ body {
 
   <!-- Footer -->
   <div class="footer">
-    <div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px;">一個人 × 三個品牌 × 一套 AI 工作系統</div>
+    <div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px;letter-spacing:-0.2px;">一個人 × 三個品牌 × 一套 AI 工作系統</div>
     <div>不是用 AI 取代思考，是讓 AI 處理重複的部分，<br>把精力放在只有我能做的決策上。</div>
     <div style="margin-top:20px;font-size:12px;">米米 Miyavi · 2026</div>
   </div>
