@@ -26,6 +26,8 @@
   --tag-research-text: #f57f17;
   --tag-content: #f3e5f5;
   --tag-content-text: #6a1b9a;
+  --tag-system: #e8eaf6;
+  --tag-system-text: #283593;
   --radius: 16px;
   --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
 }
@@ -87,9 +89,7 @@ body {
   color: var(--muted);
 }
 
-.hero-meta strong {
-  color: var(--text);
-}
+.hero-meta strong { color: var(--text); }
 
 /* Section label */
 .section-label {
@@ -163,10 +163,8 @@ body {
   font-size: 12px;
   color: var(--muted);
   margin-top: 2px;
-  font-weight: 400;
 }
 
-/* Tags */
 .tags {
   display: flex;
   flex-wrap: wrap;
@@ -183,20 +181,19 @@ body {
   white-space: nowrap;
 }
 
-.tag-auto    { background: var(--tag-auto);    color: var(--tag-auto-text); }
-.tag-cowork  { background: var(--tag-cowork);  color: var(--tag-cowork-text); }
-.tag-dev     { background: var(--tag-dev);     color: var(--tag-dev-text); }
-.tag-research{ background: var(--tag-research);color: var(--tag-research-text); }
-.tag-content { background: var(--tag-content); color: var(--tag-content-text); }
+.tag-auto     { background: var(--tag-auto);    color: var(--tag-auto-text); }
+.tag-cowork   { background: var(--tag-cowork);  color: var(--tag-cowork-text); }
+.tag-dev      { background: var(--tag-dev);     color: var(--tag-dev-text); }
+.tag-research { background: var(--tag-research);color: var(--tag-research-text); }
+.tag-content  { background: var(--tag-content); color: var(--tag-content-text); }
+.tag-system   { background: var(--tag-system);  color: var(--tag-system-text); }
 
-/* Divider */
 .card-divider {
   border: none;
   border-top: 1px solid var(--border);
   margin: 20px 0;
 }
 
-/* Body text */
 .card-desc {
   font-size: 15px;
   color: #3c3c43;
@@ -204,20 +201,14 @@ body {
   margin-bottom: 20px;
 }
 
-/* Flow steps */
-.flow {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
+/* Flow */
 .flow-title {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   color: var(--muted);
-  margin-bottom: 4px;
+  margin-bottom: 8px;
 }
 
 .flow-steps {
@@ -240,14 +231,8 @@ body {
   padding: 6px 12px;
 }
 
-.step-icon {
-  font-size: 14px;
-}
-
-.arrow {
-  font-size: 13px;
-  color: var(--muted);
-}
+.step-icon { font-size: 14px; }
+.arrow { font-size: 13px; color: var(--muted); }
 
 /* Highlight box */
 .highlight-box {
@@ -266,7 +251,19 @@ body {
   margin-bottom: 4px;
 }
 
-/* Pills row */
+/* Warning box */
+.warn-box {
+  background: #fff8e1;
+  border-left: 3px solid #f59e0b;
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
+  font-size: 13px;
+  color: #92400e;
+  line-height: 1.7;
+  margin-top: 10px;
+}
+
+/* Pills */
 .pills {
   display: flex;
   flex-wrap: wrap;
@@ -284,17 +281,11 @@ body {
   font-weight: 500;
 }
 
-/* Two-col layout for some cards */
+/* Two-col */
 .two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-}
-
-@media (max-width: 600px) {
-  .two-col { grid-template-columns: 1fr; }
-  .card-header { flex-direction: column; }
-  .card { padding: 22px 20px; }
 }
 
 .mini-card {
@@ -317,19 +308,6 @@ body {
   line-height: 1.7;
 }
 
-/* Footer */
-.footer {
-  text-align: center;
-  margin-top: 64px;
-  padding-top: 32px;
-  border-top: 1px solid var(--border);
-  font-size: 13px;
-  color: var(--muted);
-  line-height: 2;
-}
-
-.footer strong { color: var(--text); }
-
 /* Role grid */
 .role-grid {
   display: grid;
@@ -348,24 +326,20 @@ body {
   align-items: flex-start;
 }
 
-.role-emoji {
-  font-size: 18px;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-.role-name {
-  font-size: 13px;
+.role-emoji { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.role-name { font-size: 13px; font-weight: 600; color: var(--text); }
+.role-badge {
+  display: inline-block;
+  font-size: 10px;
+  background: var(--accent-light);
+  color: var(--accent);
+  border-radius: 4px;
+  padding: 1px 5px;
+  margin-left: 4px;
   font-weight: 600;
-  color: var(--text);
+  vertical-align: middle;
 }
-
-.role-desc {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 2px;
-  line-height: 1.5;
-}
+.role-desc { font-size: 11px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
 
 /* Brand chips */
 .brand-chips {
@@ -380,18 +354,89 @@ body {
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 10px 16px;
+}
+
+.brand-chip-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.brand-chip-role { font-size: 11px; color: var(--muted); }
+
+/* Setup steps */
+.setup-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.setup-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
   font-size: 13px;
+  color: #3c3c43;
+  line-height: 1.6;
 }
 
-.brand-chip-name {
-  font-weight: 600;
-  color: var(--text);
-  margin-bottom: 2px;
-}
-
-.brand-chip-role {
+.setup-num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent-light);
+  color: var(--accent);
   font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* Prompt block */
+.prompt-block {
+  background: #1c1c1f;
+  color: #e8e8ea;
+  border-radius: 10px;
+  padding: 16px 18px;
+  font-size: 13px;
+  line-height: 1.8;
+  margin-top: 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.prompt-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   color: var(--muted);
+  margin-bottom: 8px;
+  margin-top: 16px;
+}
+
+/* Bullet list */
+.bullet-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.bullet-list li {
+  font-size: 13px;
+  color: #3c3c43;
+  line-height: 1.6;
+  list-style: none;
+  padding-left: 16px;
+  position: relative;
+}
+
+.bullet-list li::before {
+  content: '·';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
 }
 
 /* Screenshots */
@@ -399,12 +444,10 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  margin-top: 16px;
+  margin-top: 20px;
 }
 
-.screenshot-row.single {
-  grid-template-columns: 1fr;
-}
+.screenshot-row.single { grid-template-columns: 1fr; }
 
 .screenshot-wrap {
   border-radius: 10px;
@@ -413,10 +456,7 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-.screenshot-wrap img {
-  width: 100%;
-  display: block;
-}
+.screenshot-wrap img { width: 100%; display: block; }
 
 .screenshot-caption {
   font-size: 11px;
@@ -425,8 +465,50 @@ body {
   margin-top: 6px;
 }
 
+/* Table */
+.md-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+.md-table th {
+  text-align: left;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+}
+
+.md-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  color: #3c3c43;
+  line-height: 1.5;
+}
+
+.md-table tr:last-child td { border-bottom: none; }
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 64px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 2;
+}
+
+.footer strong { color: var(--text); }
+
 @media (max-width: 600px) {
-  .screenshot-row { grid-template-columns: 1fr; }
+  .two-col, .screenshot-row { grid-template-columns: 1fr; }
+  .card-header { flex-direction: column; }
+  .card { padding: 22px 20px; }
+  .brand-chips { flex-direction: column; }
 }
 </style>
 </head>
@@ -440,9 +522,9 @@ body {
     <p>從廣告報表自動化、虛擬員工系統，到工具開發與市場研究，這是我與 Claude Code 的實際協作方式。</p>
     <div class="hero-meta">
       <span>米米 Miyavi</span>
-      <span style="color: var(--border)">|</span>
+      <span style="color:var(--border)">|</span>
       <strong>7 個應用場景</strong>
-      <span style="color: var(--border)">|</span>
+      <span style="color:var(--border)">|</span>
       <span>2026</span>
     </div>
   </div>
@@ -451,7 +533,7 @@ body {
 
   <div class="cards">
 
-    <!-- 01 AI 員工 × 品牌架構 -->
+    <!-- 01 -->
     <div class="card">
       <div class="card-header">
         <div class="card-title-group">
@@ -461,20 +543,16 @@ body {
             <div class="card-subtitle">虛擬員工系統 · 跨品牌知識管理</div>
           </div>
         </div>
-        <div class="tags">
-          <span class="tag tag-auto">系統架構</span>
-        </div>
+        <div class="tags"><span class="tag tag-system">系統架構</span></div>
       </div>
 
-      <p class="card-desc">
-        同時經營三個品牌、身兼多種角色，每個任務需要的思維框架截然不同。我把不同專業角色封裝成 Claude Code 的 <strong>Agent（虛擬員工）</strong>，任務一來，對應員工自動到位——不用每次重新解釋背景，不用手動切換模式。
-      </p>
+      <p class="card-desc">同時經營品牌、專案合作，身兼多種角色並需要執行不同類型的工作，每個任務需要的思維框架都不同。我把不同專業角色封裝成 Claude Code 的 <strong>Agent（虛擬員工）</strong>，任務一來，對應員工自動到位，不用每次重新解釋背景，也不用手動切換模式。</p>
 
-      <div class="flow-title">三個品牌</div>
+      <div class="flow-title">三個品牌的工作</div>
       <div class="brand-chips">
         <div class="brand-chip">
           <div class="brand-chip-name">領先時代 B.R.A.N.D</div>
-          <div class="brand-chip-role">廣告投放合作（專案）</div>
+          <div class="brand-chip-role">廣告投放（專案合作）</div>
         </div>
         <div class="brand-chip">
           <div class="brand-chip-name">數位槓桿 DigiLev</div>
@@ -493,21 +571,21 @@ body {
         <div class="role-item">
           <div class="role-emoji">📊</div>
           <div>
-            <div class="role-name">廣告策略師</div>
+            <div class="role-name">廣告策略師<span class="role-badge">*</span></div>
             <div class="role-desc">投放策略、素材方向、成效分析</div>
           </div>
         </div>
         <div class="role-item">
           <div class="role-emoji">📱</div>
           <div>
-            <div class="role-name">社群行銷</div>
+            <div class="role-name">社群行銷<span class="role-badge">*</span></div>
             <div class="role-desc">IG/Threads 文案、Reels 腳本</div>
           </div>
         </div>
         <div class="role-item">
           <div class="role-emoji">🧭</div>
           <div>
-            <div class="role-name">品牌策略師</div>
+            <div class="role-name">品牌策略師<span class="role-badge">*</span></div>
             <div class="role-desc">品牌定位、商業模式、市場策略</div>
           </div>
         </div>
@@ -528,45 +606,42 @@ body {
         <div class="role-item">
           <div class="role-emoji">💜</div>
           <div>
-            <div class="role-name">心理狀態支持</div>
+            <div class="role-name">心理狀態支持<span class="role-badge">*</span></div>
             <div class="role-desc">情緒梳理、停止內耗、燃起動力</div>
           </div>
         </div>
         <div class="role-item">
           <div class="role-emoji">🧩</div>
           <div>
-            <div class="role-name">Widget 開發專員</div>
+            <div class="role-name">Widget 開發專員<span class="role-badge">*</span></div>
             <div class="role-desc">Notion widget 開發與部署</div>
           </div>
         </div>
       </div>
 
-      <div class="highlight-box" style="margin-top: 16px;">
+      <div class="highlight-box" style="margin-top:16px;">
         <strong>強制規則</strong>
-        任務屬於哪個角色，Claude 的第一件事就是 invoke 對應 Agent——不允許先用通用模式回答再補叫。品牌背景、角色框架、過往記憶，全部自動帶入。
+        給指令後，Claude 要分辨任務屬於哪個角色，請對應的虛擬員工出來工作（品牌背景、角色框架、過往記憶，全部自動帶入），不允許先用通用模式回答再補叫。
       </div>
+      <div class="warn-box">⚠️ 這裡常常會出錯，還不知道怎麼解決！</div>
     </div>
 
-    <!-- 02 廣告報表工作流 -->
+    <!-- 02 -->
     <div class="card">
       <div class="card-header">
         <div class="card-title-group">
           <div class="card-number">02</div>
           <div>
             <div class="card-title">廣告報表自動化工作流</div>
-            <div class="card-subtitle">領先時代 B.R.A.N.D · 每週兩次</div>
+            <div class="card-subtitle">領先時代 B.R.A.N.D 課程 · 每週兩次，手動啟動</div>
           </div>
         </div>
-        <div class="tags">
-          <span class="tag tag-auto">全自動化</span>
-        </div>
+        <div class="tags"><span class="tag tag-auto">全自動化</span></div>
       </div>
 
-      <p class="card-desc">
-        輸入 <code style="background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:5px;font-size:13px;">/ads-report</code>，Claude 自動判斷今天是週一還是週五，執行對應流程——從三個平台拉數據、交叉歸因、跑判定邏輯，到輸出 Excel 報表，一個指令完成。
-      </p>
+      <p class="card-desc">輸入 <code style="background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:5px;font-size:13px;">/ads-report</code>，Claude 自動判斷今天是週一還是週五，執行對應流程。從三個平台拉數據、交叉歸因、跑判定邏輯，到輸出 Excel 報表，一個指令完成。</p>
 
-      <div class="two-col">
+      <div class="two-col" style="margin-bottom:20px;">
         <div class="mini-card">
           <div class="mini-card-title">週一大盤點</div>
           <p>上週完整報表 · 6 sheet Excel<br>廣告歸因 × 四象限判定<br>諮詢品質分析</p>
@@ -577,10 +652,8 @@ body {
         </div>
       </div>
 
-      <hr class="card-divider">
-
       <div class="flow-title">三路數據來源</div>
-      <div class="flow-steps" style="margin-bottom: 16px;">
+      <div class="flow-steps" style="margin-bottom:16px;">
         <div class="step"><span class="step-icon">📣</span>Meta 廣告後台</div>
         <span class="arrow">+</span>
         <div class="step"><span class="step-icon">📋</span>Systeme 名單系統</div>
@@ -590,26 +663,37 @@ body {
 
       <div class="flow-title">自動歸因邏輯</div>
       <div class="pills">
-        <span class="pill">utm_content = 具體廣告 ID</span>
+        <span class="pill">utm_content 有值 → 具體廣告 ID</span>
         <span class="pill">utm_source = meta/ig/fb → Meta 廣告</span>
         <span class="pill">convertkit → 電子報，不算廣告</span>
         <span class="pill">無標籤 → 來源不明</span>
       </div>
 
-      <div class="highlight-box" style="margin-top: 16px;">
+      <hr class="card-divider">
+
+      <div class="flow-title">設定方式</div>
+      <div class="setup-steps">
+        <div class="setup-step"><div class="setup-num">1</div><span>跟 Claude Code 說明工作流（使用 Wispr Flow 語音輸入）</span></div>
+        <div class="setup-step"><div class="setup-num">2</div><span>依照 Claude Code 的指示，拿到各數據來源的相關資訊（API Keys 等）</span></div>
+        <div class="setup-step"><div class="setup-num">3</div><span>提供廣告判定方法、希望報表涵蓋哪些內容</span></div>
+        <div class="setup-step"><div class="setup-num">4</div><span>設定完成後，進行小規模測試</span></div>
+        <div class="setup-step"><div class="setup-num">5</div><span>沒問題後，請 Claude Code 記錄（md、skill 等）</span></div>
+      </div>
+
+      <div class="highlight-box" style="margin-top:16px;">
         <strong>判定機制</strong>
         CPL ≤$5 好 · $5–8 警示 · ≥$8 不行。四象限（CPL × 有無諮詢）從「優等廣告」到「垃圾廣告」。停廣告需同時符合：CPL ≥$8 且 4 天 + 7 天趨勢都差。
       </div>
     </div>
 
-    <!-- 03 廣告痛點分析 -->
+    <!-- 03 -->
     <div class="card">
       <div class="card-header">
         <div class="card-title-group">
           <div class="card-number">03</div>
           <div>
             <div class="card-title">廣告痛點分析 × TA 報告</div>
-            <div class="card-subtitle">Notion 諮詢名單 → 報告 → 廣告貼文</div>
+            <div class="card-subtitle">Notion 諮詢名單 → 分析 → 廣告素材</div>
           </div>
         </div>
         <div class="tags">
@@ -618,12 +702,8 @@ body {
         </div>
       </div>
 
-      <p class="card-desc">
-        從 Notion 諮詢資料庫直接抓取成交客戶的記錄，讓 Claude 分析這些人的共同痛點、背景、決策動機，生成結構化的 TA 分析報告——再把報告作為素材，產出廣告貼文。從數據到廣告，一條龍。
-      </p>
-
       <div class="flow-title">執行流程</div>
-      <div class="flow-steps">
+      <div class="flow-steps" style="margin-bottom:16px;">
         <div class="step"><span class="step-icon">🗃</span>串接 Notion 諮詢 DB</div>
         <span class="arrow">→</span>
         <div class="step"><span class="step-icon">🔍</span>篩出成交者記錄</div>
@@ -632,16 +712,20 @@ body {
         <span class="arrow">→</span>
         <div class="step"><span class="step-icon">📄</span>TA 分析報告</div>
         <span class="arrow">→</span>
-        <div class="step"><span class="step-icon">📣</span>廣告貼文產出</div>
+        <div class="step"><span class="step-icon">🖼</span>手動廣告圖文產出</div>
       </div>
 
-      <div class="highlight-box" style="margin-top: 16px;">
+      <div class="highlight-box">
         <strong>為什麼這樣做？</strong>
-        廣告文案最難的不是寫作，是「知道受眾在痛什麼」。用真實諮詢數據回推，比靠感覺猜受眾準確得多。
+        廣告文案最難的不是寫作，是「知道受眾在痛什麼」。用真實諮詢資訊回推，比單純做 TA 側寫分析還要準確。
+      </div>
+
+      <div class="warn-box" style="margin-top:10px;">
+        🔧 未來待優化：讓廣告的痛點呈現，對齊課程內容（解方）
       </div>
     </div>
 
-    <!-- 04 社群貼文排程表 -->
+    <!-- 04 -->
     <div class="card">
       <div class="card-header">
         <div class="card-title-group">
@@ -657,26 +741,23 @@ body {
         </div>
       </div>
 
-      <p class="card-desc">
-        輸入 <code style="background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:5px;font-size:13px;">/social-plan</code>，由社群行銷 Agent 接手，根據品牌定位與當月目標，規劃完整的月排程——主題方向、格式配比、每篇文案角度，直接輸出可用的表格版本。
-      </p>
+      <p class="card-desc">輸入 <code style="background:var(--bg);border:1px solid var(--border);padding:2px 8px;border-radius:5px;font-size:13px;">/social-plan</code>，由社群行銷的虛擬員工接手，根據品牌定位與當月目標，規劃完整的月排程——包含主題方向、格式配比、每篇文案角度，直接輸出可用的表格版本。</p>
 
       <div class="flow-title">輸出內容</div>
       <div class="pills">
         <span class="pill">月曆格式排程表</span>
         <span class="pill">教育型 / 娛樂型 / 轉換型配比</span>
-        <span class="pill">每篇主題 + 文案角度</span>
+        <span class="pill">每篇主題 + 文案角度（Content Pillar）</span>
         <span class="pill">IG Reels 腳本方向</span>
-        <span class="pill">話題標籤策略</span>
       </div>
 
-      <div class="highlight-box" style="margin-top: 16px;">
+      <div class="highlight-box" style="margin-top:16px;">
         <strong>社群行銷 Agent 的思維框架</strong>
-        先確認這篇內容「為誰服務」（吸引新受眾 vs. 維繫現有受眾）→ 以信任建立路徑思考內容序列，不只看單篇效果。
+        先確認這篇內容「為誰服務」（吸引新受眾 vs. 維繫現有受眾）、貼文「目的」（不為發而發，內容要為目的服務），並以信任建立路徑思考內容序列，不只看單篇效果。
       </div>
     </div>
 
-    <!-- 05 Notion Widgets 開發 -->
+    <!-- 05 -->
     <div class="card">
       <div class="card-header">
         <div class="card-title-group">
@@ -686,30 +767,24 @@ body {
             <div class="card-subtitle">小勝利 · GitHub Pages 部署</div>
           </div>
         </div>
-        <div class="tags">
-          <span class="tag tag-dev">工具開發</span>
-        </div>
+        <div class="tags"><span class="tag tag-dev">工具開發</span></div>
       </div>
 
-      <p class="card-desc">
-        為 Notion 模板加入互動式 widget，讓下載模板的用戶可以直接使用內嵌工具。技術上用靜態 HTML + iframe embed，部署在 GitHub Pages，免費、永久、不需後端。
-      </p>
+      <p class="card-desc">為 Notion 模板加入互動式 widget，讓下載模板的用戶可以直接使用內嵌工具，不用自行串接 API，或使用第三方 widgets 服務商。技術上用靜態 HTML + iframe embed，部署在 GitHub Pages，免費、永久、不需後端。</p>
 
       <div class="two-col">
         <div class="mini-card">
           <div class="mini-card-title">幣值換算器</div>
-          <p>8 種幣別（TWD/USD/JPY/KRW/EUR/GBP/HKD/SGD）· 即時匯率 API · 防抖 + 快取 · 日圓韓元取整數</p>
+          <p>8 種幣別（TWD/USD/JPY/KRW/EUR/GBP/HKD/SGD）· 即時匯率 API（每日更新），輸入時即時換算 · 日圓、韓元取整數</p>
         </div>
         <div class="mini-card">
           <div class="mini-card-title">番茄鐘</div>
-          <p>三段模式（工作/短休/長休）· 番茄造型漸層設計 · SVG 進度環 · 音效 · 分頁標題同步倒數</p>
+          <p>三段模式（工作、短休、長休）· 番茄造型漸層設計 · SVG 圓形進度環 · 音效提示 · 瀏覽器分頁標題列顯示倒數時間</p>
         </div>
       </div>
 
-      <hr class="card-divider">
-
-      <div class="flow-title">開發到部署流程</div>
-      <div class="flow-steps">
+      <div class="flow-title" style="margin-top:20px;">開發到部署流程</div>
+      <div class="flow-steps" style="margin-bottom:16px;">
         <div class="step"><span class="step-icon">💬</span>描述需求給 Agent</div>
         <span class="arrow">→</span>
         <div class="step"><span class="step-icon">⚡</span>Claude 寫 HTML</div>
@@ -720,8 +795,9 @@ body {
         <span class="arrow">→</span>
         <div class="step"><span class="step-icon">📎</span>embed URL 放進 Notion</div>
       </div>
+      <p style="font-size:12px;color:var(--muted);">客戶不用做任何動作，直接套用模板即可使用。</p>
 
-      <div class="screenshot-row" style="margin-top: 20px;">
+      <div class="screenshot-row" style="margin-top:20px;">
         <div>
           <div class="screenshot-wrap">
             <img src="./screenshot_pomodoro.png" alt="番茄鐘 widget 成品">
@@ -737,7 +813,7 @@ body {
       </div>
     </div>
 
-    <!-- 06 文字轉語音工具 -->
+    <!-- 06 -->
     <div class="card">
       <div class="card-header">
         <div class="card-title-group">
@@ -747,17 +823,13 @@ body {
             <div class="card-subtitle">Deepgram Aura TTS · Karaoke 同步 highlight</div>
           </div>
         </div>
-        <div class="tags">
-          <span class="tag tag-dev">工具開發</span>
-        </div>
+        <div class="tags"><span class="tag tag-dev">工具開發</span></div>
       </div>
 
-      <p class="card-desc">
-        描述需求，Claude Code 直接串接 Deepgram Aura TTS API 寫出工具。輸入文字，生成語音的同時取得逐字時間軸，播放時像 Karaoke 一樣逐字 highlight，已讀文字變灰，方便跟讀或校對。
-      </p>
+      <p class="card-desc">描述需求，Claude Code 直接串接 Deepgram Aura TTS API 寫出工具。輸入文字，生成語音的同時取得逐字時間軸，播放時像 Karaoke 一樣逐字 highlight，已讀文字變灰，方便跟讀或校對。</p>
 
       <div class="flow-title">技術流程</div>
-      <div class="flow-steps" style="margin-bottom: 16px;">
+      <div class="flow-steps" style="margin-bottom:20px;">
         <div class="step"><span class="step-icon">📝</span>輸入文字</div>
         <span class="arrow">→</span>
         <div class="step"><span class="step-icon">🔊</span>Deepgram TTS 生成音訊</div>
@@ -770,15 +842,15 @@ body {
       <div class="two-col">
         <div class="mini-card">
           <div class="mini-card-title">語音選擇</div>
-          <p>6 種 Aura 語音（男/女、不同語氣風格）· 語速 0.75x–1.25x 可調</p>
+          <p>6 種 Aura 語音（男/女不同語氣風格）· 語速 0.75x–1.25x 可調</p>
         </div>
         <div class="mini-card">
           <div class="mini-card-title">播放控制</div>
-          <p>進度條 seek · 暫停繼續 · 分頁標題顯示進度 · STT 失敗自動 fallback</p>
+          <p>進度條 · 可暫停繼續 · 瀏覽器分頁標題顯示剩餘時間 · STT 失敗自動 fallback</p>
         </div>
       </div>
 
-      <div class="screenshot-row single" style="margin-top: 20px;">
+      <div class="screenshot-row single" style="margin-top:20px;">
         <div>
           <div class="screenshot-wrap">
             <img src="./screenshot_speed_reader.png" alt="Speed Reader 成品">
@@ -788,7 +860,7 @@ body {
       </div>
     </div>
 
-    <!-- 07 市場研究 × 品牌願景網頁 -->
+    <!-- 07 -->
     <div class="card">
       <div class="card-header">
         <div class="card-title-group">
@@ -804,12 +876,10 @@ body {
         </div>
       </div>
 
-      <p class="card-desc">
-        分別用 Gemini 與 Claude Chat 的 Research 功能深度研究國外 Notion 顧問市場，產出各自的報告與洞察——再把兩份研究結果帶到 Claude Code，整合成結構化、適合對外分享的品牌願景網頁。
-      </p>
+      <p class="card-desc">分別用 Gemini 與 Claude Chat 的 Research 功能深度研究國外 Notion 顧問市場，產出各自的報告與洞察，再把兩份研究結果帶到 Claude Code，整合成結構化、適合閱讀的品牌願景網頁。</p>
 
-      <div class="flow-title">研究到輸出的流程</div>
-      <div class="flow-steps">
+      <div class="flow-title">研究到輸出</div>
+      <div class="flow-steps" style="margin-bottom:20px;">
         <div class="step"><span class="step-icon">🔬</span>Gemini Research</div>
         <span class="arrow">+</span>
         <div class="step"><span class="step-icon">🔬</span>Claude Chat Research</div>
@@ -819,9 +889,26 @@ body {
         <div class="step"><span class="step-icon">🌐</span>好讀網頁版輸出</div>
       </div>
 
-      <div class="highlight-box" style="margin-top: 16px;">
+      <div class="prompt-label">Research 使用的 Prompt（第一段）</div>
+      <div class="prompt-block">針對美國、歐洲、亞洲市場，進行「Notion 顧問業」的深度掃描（請把 AI 現在的趨勢也一同納入考量）。請以當地語言（英語、日語等）搜尋權威報告與本月當地社群討論。我需要結構化的數據：市場規模、CAGR、競品分析、以及在地消費者偏好。請綜合閱讀至少 500 篇以上的資料，並標註來源。結論從四個不同的角度來回答，成長的、衰退的、新的機會、以及應捨棄的類別是什麼，並解釋為什麼？</div>
+
+      <div class="prompt-label">Prompt 所包含的元素</div>
+      <ul class="bullet-list">
+        <li>大背景：定調市場</li>
+        <li>以當地語言深入權威＋社群</li>
+        <li>結構化數據的具體內容</li>
+        <li>研究量體</li>
+        <li>報告結果格式</li>
+      </ul>
+
+      <div class="prompt-label">Research 使用的 Prompt（第二段）</div>
+      <div class="prompt-block">接著分析：如果要在台灣建立一間足以壟斷市場的數位工作流設計顧問公司，幫助大中小企業用不同的數位工具（先以 Notion 為主，後面可以延伸整合不同工具）製作內部工作流營運系統，實際上可落地執行的藍圖跟各階段運作策略為何？
+
+備註：壟斷的概念來自 Peter Thiel，重點在於建立一個根本不用競爭、跟其他相同性質的競品拉開距離的地位。在市場供需概念方面，可以參考 Oversubscribed 一書中的概念。</div>
+
+      <div class="highlight-box" style="margin-top:16px;">
         <strong>為什麼這樣用？</strong>
-        Research 功能負責廣度與深度的資料蒐集，Claude Code 負責把原始研究結果轉化成「可以拿去用」的格式。工具各司其職，不用同一個地方全包。
+        Research 功能負責廣度與深度的資料蒐集，Claude Code 負責把原始研究結果轉化成「可以快速理解」的網頁格式。工具各司其職，不用同一個地方全包。添加自己在書中讀到的框架，也會生成跟別人比較不同的內容。
       </div>
     </div>
 
@@ -829,9 +916,9 @@ body {
 
   <!-- Footer -->
   <div class="footer">
-    <div style="font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 8px;">一個人 × 三個品牌 × 一套 AI 工作系統</div>
+    <div style="font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px;">一個人 × 三個品牌 × 一套 AI 工作系統</div>
     <div>不是用 AI 取代思考，是讓 AI 處理重複的部分，<br>把精力放在只有我能做的決策上。</div>
-    <div style="margin-top: 20px; font-size: 12px;">米米 Miyavi · 2026</div>
+    <div style="margin-top:20px;font-size:12px;">米米 Miyavi · 2026</div>
   </div>
 
 </div>
